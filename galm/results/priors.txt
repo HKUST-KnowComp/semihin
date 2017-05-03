@@ -1,0 +1,3 @@
+Prior[comp.sys.mac.hardware]=0.31971648666666797
+Prior[comp.graphics]=0.3570517133333368
+Prior[comp.os.ms-windows.misc]=0.3232318000000016

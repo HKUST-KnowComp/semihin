@@ -1,0 +1,12 @@
+20news.hin
+GCAT.hin
+GCAT_modified.hin
+temp/*
+*.swp
+svm\*.swp
+.idea
+local/*
+data/*
+*.pyc
+wc
+wc_gcat

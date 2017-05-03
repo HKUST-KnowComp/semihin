@@ -1,0 +1,60 @@
+Estimated Confusion Matrix (MV_MaxLikelihood):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=97.43%	P[comp.sys.mac.hardware->comp.graphics]=1.187%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=1.383%	
+P[comp.graphics->comp.sys.mac.hardware]=1.222%	P[comp.graphics->comp.graphics]=96.881%	P[comp.graphics->comp.os.ms-windows.misc]=1.897%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=1.121%	P[comp.os.ms-windows.misc->comp.graphics]=1.082%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=97.796%	
+
+Estimated Confusion Matrix (DS_MaxLikelihood):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=99.992%	P[comp.sys.mac.hardware->comp.graphics]=0.0%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.008%	
+P[comp.graphics->comp.sys.mac.hardware]=0.0%	P[comp.graphics->comp.graphics]=100.0%	P[comp.graphics->comp.os.ms-windows.misc]=0.0%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.023%	P[comp.os.ms-windows.misc->comp.graphics]=0.016%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.96%	
+
+Estimated Confusion Matrix (MV_Soft):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=96.329%	P[comp.sys.mac.hardware->comp.graphics]=1.777%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=1.894%	
+P[comp.graphics->comp.sys.mac.hardware]=1.603%	P[comp.graphics->comp.graphics]=96.319%	P[comp.graphics->comp.os.ms-windows.misc]=2.079%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=1.845%	P[comp.os.ms-windows.misc->comp.graphics]=2.244%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=95.912%	
+
+Estimated Confusion Matrix (DS_Soft):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=99.974%	P[comp.sys.mac.hardware->comp.graphics]=0.0%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.026%	
+P[comp.graphics->comp.sys.mac.hardware]=0.0%	P[comp.graphics->comp.graphics]=99.987%	P[comp.graphics->comp.os.ms-windows.misc]=0.013%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.026%	P[comp.os.ms-windows.misc->comp.graphics]=0.014%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.961%	
+
+Estimated Confusion Matrix (MV_MinCost):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=97.268%	P[comp.sys.mac.hardware->comp.graphics]=1.21%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=1.522%	
+P[comp.graphics->comp.sys.mac.hardware]=1.084%	P[comp.graphics->comp.graphics]=96.968%	P[comp.graphics->comp.os.ms-windows.misc]=1.947%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=1.073%	P[comp.os.ms-windows.misc->comp.graphics]=0.982%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=97.945%	
+
+Estimated Confusion Matrix (DS_MinCost):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=99.992%	P[comp.sys.mac.hardware->comp.graphics]=0.0%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.008%	
+P[comp.graphics->comp.sys.mac.hardware]=0.0%	P[comp.graphics->comp.graphics]=100.0%	P[comp.graphics->comp.os.ms-windows.misc]=0.0%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.023%	P[comp.os.ms-windows.misc->comp.graphics]=0.016%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.96%	
+
+Actual Confusion Matrix (MV_MaxLikelihood):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=80.32%	P[comp.sys.mac.hardware->comp.graphics]=13.501%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.178%	
+P[comp.graphics->comp.sys.mac.hardware]=4.623%	P[comp.graphics->comp.graphics]=87.348%	P[comp.graphics->comp.os.ms-windows.misc]=8.029%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=5.811%	P[comp.os.ms-windows.misc->comp.graphics]=15.981%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=78.208%	
+
+Actual Confusion Matrix (DS_MaxLikelihood):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.863%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.407%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=86.375%	P[comp.graphics->comp.os.ms-windows.misc]=8.273%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=6.053%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.724%	
+
+Actual Confusion Matrix (MV_Soft):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.519%	P[comp.sys.mac.hardware->comp.graphics]=13.701%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.779%	
+P[comp.graphics->comp.sys.mac.hardware]=5.414%	P[comp.graphics->comp.graphics]=84.672%	P[comp.graphics->comp.os.ms-windows.misc]=9.915%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=5.811%	P[comp.os.ms-windows.misc->comp.graphics]=15.436%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=78.753%	
+
+Actual Confusion Matrix (DS_Soft):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.915%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.355%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=86.412%	P[comp.graphics->comp.os.ms-windows.misc]=8.235%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=6.034%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.743%	
+
+Actual Confusion Matrix (MV_MinCost):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=80.549%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=5.721%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=86.618%	P[comp.graphics->comp.os.ms-windows.misc]=8.029%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=5.811%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.966%	
+
+Actual Confusion Matrix (DS_MinCost):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.863%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.407%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=86.375%	P[comp.graphics->comp.os.ms-windows.misc]=8.273%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=6.053%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.724%	
+

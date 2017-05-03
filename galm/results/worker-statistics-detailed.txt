@@ -1,0 +1,192 @@
+Worker: alpha_0.5_type__scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 78.95%
+WorkerQuality_Estm_DS_Exp_w: 78.95%
+WorkerQuality_Estm_DS_ML_n: 88.82%
+WorkerQuality_Estm_DS_ML_w: 88.82%
+WorkerQuality_Estm_DS_Min_n: 88.82%
+WorkerQuality_Estm_DS_Min_w: 88.82%
+WorkerQuality_Eval_DS_Exp_n: 52.99%
+WorkerQuality_Eval_DS_Exp_w: 52.99%
+WorkerQuality_Eval_DS_ML_n: 73.07%
+WorkerQuality_Eval_DS_ML_w: 73.07%
+WorkerQuality_Eval_DS_Min_n: 73.07%
+WorkerQuality_Eval_DS_Min_w: 73.07%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=93.137%	P[comp.sys.mac.hardware->comp.graphics]=2.917%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=3.946%	
+P[comp.graphics->comp.sys.mac.hardware]=3.639%	P[comp.graphics->comp.graphics]=90.691%	P[comp.graphics->comp.os.ms-windows.misc]=5.67%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=2.995%	P[comp.os.ms-windows.misc->comp.graphics]=2.175%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=94.83%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=81.922%	P[comp.sys.mac.hardware->comp.graphics]=11.899%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.178%	
+P[comp.graphics->comp.sys.mac.hardware]=5.596%	P[comp.graphics->comp.graphics]=81.509%	P[comp.graphics->comp.os.ms-windows.misc]=12.895%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=4.358%	P[comp.os.ms-windows.misc->comp.graphics]=10.896%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=84.746%	
+
+Worker: alpha_0.5_type_astronomy_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 98.92%
+WorkerQuality_Estm_DS_Exp_w: 98.92%
+WorkerQuality_Estm_DS_ML_n: 99.46%
+WorkerQuality_Estm_DS_ML_w: 99.46%
+WorkerQuality_Estm_DS_Min_n: 99.46%
+WorkerQuality_Estm_DS_Min_w: 99.46%
+WorkerQuality_Eval_DS_Exp_n: 48.78%
+WorkerQuality_Eval_DS_Exp_w: 48.78%
+WorkerQuality_Eval_DS_ML_n: 70.70%
+WorkerQuality_Eval_DS_ML_w: 70.70%
+WorkerQuality_Eval_DS_Min_n: 70.70%
+WorkerQuality_Eval_DS_Min_w: 70.70%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=99.749%	P[comp.sys.mac.hardware->comp.graphics]=0.104%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.147%	
+P[comp.graphics->comp.sys.mac.hardware]=0.0%	P[comp.graphics->comp.graphics]=99.533%	P[comp.graphics->comp.os.ms-windows.misc]=0.467%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.211%	P[comp.os.ms-windows.misc->comp.graphics]=0.105%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.684%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.634%	P[comp.sys.mac.hardware->comp.graphics]=13.959%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.407%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=85.645%	P[comp.graphics->comp.os.ms-windows.misc]=9.002%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=6.053%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.724%	
+
+Worker: alpha_0.5_type_automotive_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 99.18%
+WorkerQuality_Estm_DS_Exp_w: 99.18%
+WorkerQuality_Estm_DS_ML_n: 99.59%
+WorkerQuality_Estm_DS_ML_w: 99.59%
+WorkerQuality_Estm_DS_Min_n: 99.59%
+WorkerQuality_Estm_DS_Min_w: 99.59%
+WorkerQuality_Eval_DS_Exp_n: 49.47%
+WorkerQuality_Eval_DS_Exp_w: 49.47%
+WorkerQuality_Eval_DS_ML_n: 71.19%
+WorkerQuality_Eval_DS_ML_w: 71.19%
+WorkerQuality_Eval_DS_Min_n: 71.19%
+WorkerQuality_Eval_DS_Min_w: 71.19%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=99.829%	P[comp.sys.mac.hardware->comp.graphics]=0.104%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.067%	
+P[comp.graphics->comp.sys.mac.hardware]=0.0%	P[comp.graphics->comp.graphics]=99.616%	P[comp.graphics->comp.os.ms-windows.misc]=0.384%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.206%	P[comp.os.ms-windows.misc->comp.graphics]=0.015%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.779%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=80.092%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.178%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=85.888%	P[comp.graphics->comp.os.ms-windows.misc]=8.759%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=5.811%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.966%	
+
+Worker: alpha_0.5_type_business_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 91.08%
+WorkerQuality_Estm_DS_Exp_w: 91.08%
+WorkerQuality_Estm_DS_ML_n: 95.43%
+WorkerQuality_Estm_DS_ML_w: 95.43%
+WorkerQuality_Estm_DS_Min_n: 95.43%
+WorkerQuality_Estm_DS_Min_w: 95.43%
+WorkerQuality_Eval_DS_Exp_n: 48.35%
+WorkerQuality_Eval_DS_Exp_w: 48.35%
+WorkerQuality_Eval_DS_ML_n: 70.30%
+WorkerQuality_Eval_DS_ML_w: 70.30%
+WorkerQuality_Eval_DS_Min_n: 70.30%
+WorkerQuality_Eval_DS_Min_w: 70.30%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=96.569%	P[comp.sys.mac.hardware->comp.graphics]=1.354%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=2.076%	
+P[comp.graphics->comp.sys.mac.hardware]=1.307%	P[comp.graphics->comp.graphics]=97.105%	P[comp.graphics->comp.os.ms-windows.misc]=1.588%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=1.444%	P[comp.os.ms-windows.misc->comp.graphics]=1.047%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=97.509%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.405%	P[comp.sys.mac.hardware->comp.graphics]=13.272%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=7.323%	
+P[comp.graphics->comp.sys.mac.hardware]=5.109%	P[comp.graphics->comp.graphics]=84.915%	P[comp.graphics->comp.os.ms-windows.misc]=9.976%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=5.811%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.966%	
+
+Worker: alpha_0.5_type_computer_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 84.32%
+WorkerQuality_Estm_DS_Exp_w: 84.32%
+WorkerQuality_Estm_DS_ML_n: 91.81%
+WorkerQuality_Estm_DS_ML_w: 91.81%
+WorkerQuality_Estm_DS_Min_n: 91.81%
+WorkerQuality_Estm_DS_Min_w: 91.81%
+WorkerQuality_Eval_DS_Exp_n: 51.37%
+WorkerQuality_Eval_DS_Exp_w: 51.37%
+WorkerQuality_Eval_DS_ML_n: 72.38%
+WorkerQuality_Eval_DS_ML_w: 72.38%
+WorkerQuality_Eval_DS_Min_n: 72.38%
+WorkerQuality_Eval_DS_Min_w: 72.38%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=94.801%	P[comp.sys.mac.hardware->comp.graphics]=2.396%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=2.803%	
+P[comp.graphics->comp.sys.mac.hardware]=1.307%	P[comp.graphics->comp.graphics]=94.491%	P[comp.graphics->comp.os.ms-windows.misc]=4.202%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=2.476%	P[comp.os.ms-windows.misc->comp.graphics]=2.585%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=94.938%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=80.092%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.178%	
+P[comp.graphics->comp.sys.mac.hardware]=3.893%	P[comp.graphics->comp.graphics]=85.401%	P[comp.graphics->comp.os.ms-windows.misc]=10.706%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=4.6%	P[comp.os.ms-windows.misc->comp.graphics]=14.528%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=80.872%	
+
+Worker: alpha_0.5_type_government_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 96.80%
+WorkerQuality_Estm_DS_Exp_w: 96.80%
+WorkerQuality_Estm_DS_ML_n: 98.39%
+WorkerQuality_Estm_DS_ML_w: 98.39%
+WorkerQuality_Estm_DS_Min_n: 98.39%
+WorkerQuality_Estm_DS_Min_w: 98.39%
+WorkerQuality_Eval_DS_Exp_n: 49.68%
+WorkerQuality_Eval_DS_Exp_w: 49.68%
+WorkerQuality_Eval_DS_ML_n: 71.39%
+WorkerQuality_Eval_DS_ML_w: 71.39%
+WorkerQuality_Eval_DS_Min_n: 71.39%
+WorkerQuality_Eval_DS_Min_w: 71.39%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=98.646%	P[comp.sys.mac.hardware->comp.graphics]=0.938%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.416%	
+P[comp.graphics->comp.sys.mac.hardware]=0.28%	P[comp.graphics->comp.graphics]=98.874%	P[comp.graphics->comp.os.ms-windows.misc]=0.846%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.314%	P[comp.os.ms-windows.misc->comp.graphics]=0.31%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.376%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=78.947%	P[comp.sys.mac.hardware->comp.graphics]=14.416%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.636%	
+P[comp.graphics->comp.sys.mac.hardware]=4.866%	P[comp.graphics->comp.graphics]=86.618%	P[comp.graphics->comp.os.ms-windows.misc]=8.516%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=6.053%	P[comp.os.ms-windows.misc->comp.graphics]=15.254%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=78.692%	
+
+Worker: alpha_0.5_type_organization_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 87.35%
+WorkerQuality_Estm_DS_Exp_w: 87.35%
+WorkerQuality_Estm_DS_ML_n: 93.46%
+WorkerQuality_Estm_DS_ML_w: 93.46%
+WorkerQuality_Estm_DS_Min_n: 93.46%
+WorkerQuality_Estm_DS_Min_w: 93.46%
+WorkerQuality_Eval_DS_Exp_n: 41.08%
+WorkerQuality_Eval_DS_Exp_w: 41.08%
+WorkerQuality_Eval_DS_ML_n: 64.99%
+WorkerQuality_Eval_DS_ML_w: 64.99%
+WorkerQuality_Eval_DS_Min_n: 64.99%
+WorkerQuality_Eval_DS_Min_w: 64.99%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=95.637%	P[comp.sys.mac.hardware->comp.graphics]=1.971%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=2.392%	
+P[comp.graphics->comp.sys.mac.hardware]=2.148%	P[comp.graphics->comp.graphics]=95.703%	P[comp.graphics->comp.os.ms-windows.misc]=2.15%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=1.96%	P[comp.os.ms-windows.misc->comp.graphics]=1.976%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=96.063%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=76.201%	P[comp.sys.mac.hardware->comp.graphics]=14.874%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=8.924%	
+P[comp.graphics->comp.sys.mac.hardware]=7.786%	P[comp.graphics->comp.graphics]=81.509%	P[comp.graphics->comp.os.ms-windows.misc]=10.706%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=7.748%	P[comp.os.ms-windows.misc->comp.graphics]=17.918%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=74.334%	
+
+Worker: alpha_0.5_type_spaceflight_scope_hard_label_percentage_0.6_
+WorkerQuality_Estm_DS_Exp_n: 99.22%
+WorkerQuality_Estm_DS_Exp_w: 99.22%
+WorkerQuality_Estm_DS_ML_n: 99.61%
+WorkerQuality_Estm_DS_ML_w: 99.61%
+WorkerQuality_Estm_DS_Min_n: 99.61%
+WorkerQuality_Estm_DS_Min_w: 99.61%
+WorkerQuality_Eval_DS_Exp_n: 49.13%
+WorkerQuality_Eval_DS_Exp_w: 49.13%
+WorkerQuality_Eval_DS_ML_n: 70.95%
+WorkerQuality_Eval_DS_ML_w: 70.95%
+WorkerQuality_Eval_DS_Min_n: 70.95%
+WorkerQuality_Eval_DS_Min_w: 70.95%
+Number of labels: 3000.0000
+Gold Tests: 1739.0000
+Estimated Confusion Matrix:
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=99.852%	P[comp.sys.mac.hardware->comp.graphics]=0.001%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=0.147%	
+P[comp.graphics->comp.sys.mac.hardware]=0.0%	P[comp.graphics->comp.graphics]=99.705%	P[comp.graphics->comp.os.ms-windows.misc]=0.295%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=0.211%	P[comp.os.ms-windows.misc->comp.graphics]=0.098%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=99.692%	
+Actual Confusion Matrix (evaluation data):
+P[comp.sys.mac.hardware->comp.sys.mac.hardware]=79.863%	P[comp.sys.mac.hardware->comp.graphics]=13.73%	P[comp.sys.mac.hardware->comp.os.ms-windows.misc]=6.407%	
+P[comp.graphics->comp.sys.mac.hardware]=5.353%	P[comp.graphics->comp.graphics]=85.888%	P[comp.graphics->comp.os.ms-windows.misc]=8.759%	
+P[comp.os.ms-windows.misc->comp.sys.mac.hardware]=6.053%	P[comp.os.ms-windows.misc->comp.graphics]=16.223%	P[comp.os.ms-windows.misc->comp.os.ms-windows.misc]=77.724%	
+
