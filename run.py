@@ -42,7 +42,6 @@ lp_cand = [5]
 result = np.zeros((4,11))
 
 
-
 def run_dump_gcat(scope_name, scope):
     if not os.path.exists('data/local'):
         os.makedirs('data/local')
@@ -218,7 +217,7 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
     repeats = 50
 
     # rounds for alternating optimization
-    rounds = 3
+    rounds = 2
 
     best_res = 0
 
@@ -504,7 +503,7 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
     repeats = 50
 
     # rounds for alternating optimization
-    rounds = 5
+    rounds = 3
 
     best_res = 0
     best_t = ''
@@ -596,7 +595,6 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
 def run_lp_meta():
     # 20NG
     for i in range(2):
-    #for i in [1]:
         scope_name = ng20_scope_names[i]
         scope = ng20_scopes[i]
         count = ng20_counts[i]
@@ -665,7 +663,6 @@ def run_meta_graph_ensemble_gal():
 def run_meta_graph_ensemble_cotrain():
     # 20NG
     for i in range(2):
-    #for i in [1]:
         scope_name = ng20_scope_names[i]
         scope = ng20_scopes[i]
         count = ng20_counts[i]
@@ -879,6 +876,7 @@ def run_semihin():
         print scope_name + ' semihin+entity'
         result[i+2, 7] = semihin_experiment(scope, scope_name, count, X, newIds)
 
+
 def dump_result():
     with open('result', 'w') as f:
         pk.dump(result, f)
@@ -907,14 +905,12 @@ def run_all_experiments():
 
 
 def run_all():
-    #dump_hin()
-    #generate_train_test_split()
-    #run_laplacian_feature_search()
-    #run_generate_meta_graph()
+    dump_hin()
+    generate_train_test_split()
+    run_laplacian_feature_search()
+    run_generate_meta_graph()
     run_all_experiments()
     print_result()
     dump_result()
 
 run_all()
-#run_lp_meta()
-print_result()
