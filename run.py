@@ -276,7 +276,7 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
                         for i,k in enumerate(trainLabel.keys()):
                             typePred[k,:] = trainPred[i,:]
 
-                    with open(pred_path + 'lb' + str(lb).zfill(3) + '_' + str(t) + '_' + str(r).zfill(3) + '_test') as f:
+                    with open(pred_path + str(t) + '/lb' + str(lb).zfill(3) + '_' + str(r).zfill(3) + '_test') as f:
                         testPred = pk.load(f)
                         for i,k in enumerate(testLabel.keys()):
                             typePred[k,:] = testPred[i,:]
