@@ -22,7 +22,8 @@ def read_gal_result(scope_name):
             elif line.startswith('[DataCost_Eval_MV_Soft]'):
                 loss.append(float(sp[8]))
         results.append(1 - np.min(np.array(loss)))
-    print str(np.mean(results)) + '\t' + str(np.std(results))
+    #print str(np.mean(results)) + '\t' + str(np.std(results))
+    print '%.2f%%' % (np.mean(results) * 100)
 
 scopes = ['SIM', 'DIFF', 'GSIM', 'GDIF']
 for s in scopes:

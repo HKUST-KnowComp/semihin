@@ -885,11 +885,12 @@ def dump_result():
 def print_result():
     print 'This is result in Latex format. Please run galm.sh/galm.bat and gal_result.py to get result for get-another-label ensemble.'
     s_list = ['20NG-SIM', '20NG-DIFF', 'GCAT-SIM', 'GCAT-DIFF']
-    print 'dataset & NB & NB+entity & SVM & SVM + entity & LP+entity & LP+metapath &'
+    print 'dataset & NB & NB+entity & SVM & SVM + entity & LP+entity & LP+metapath & Semihin & Semihin+entity & SVM ens & GAL ens & Cotrain ens'
     for j in range(4):
         s = s_list[j]
         for i in range(11):
-            s += ' & $%.2f%%$' % (result[j, i] * 100)
+            s += ' & $%.2f\\%%$' % (result[j, i] * 100)
+        s += '  \\\\'
         print s
 
 
