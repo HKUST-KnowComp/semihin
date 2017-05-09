@@ -143,14 +143,16 @@ class SSLClassifier:
                     pk.dump(pred, f)
             self.results.append(e)
 
-    def repeatedFixedExpeimentwithInput(self,pathPrefix,newIds,saveProb=True,savePathPrefix='',savePred=False,inputPred=None):
+    def repeatedFixedExpeimentwithInput(self,pathPrefix,newIds,saveProb=True,savePathPrefix='',savePred=False,inputPredPath=None):
         beta = 0.9
         self.results = []
         for r in range(self.repeatTimes):
             self.loadFixedExperimentwithNewIds(pathPrefix+str(r).zfill(3),newIds)
 
+            with open(inputPredPath + '_' + str(r).zfill(3)) as f:
+                inputPred = pk.load(f)
             # generate y
-            self.MakeyAndPred(inputPred,beta)
+            self.MakeyAndPred(inputPred, beta)
 
             e,trainProb,testProb,pred = self.runExperiment()
             if saveProb:
@@ -189,3 +191,6 @@ class SSLClassifier:
         mean = np.mean(self.results)
         std = np.std(self.results)
         print str(mean) + '\t' + str(std)
+
+    def get_mean(self):
+        return np.mean(self.results)
