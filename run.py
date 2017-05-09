@@ -209,7 +209,7 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
         os.makedirs(pred_path)
     split_path = 'data/local/split/' + scope_name + '/'
 
-    with open('data/local/' + scope_name + 'DIFF.dmp') as f:
+    with open('data/local/' + scope_name + '.dmp') as f:
         hin = pk.load(f)
 
     tf_param = {'word':True, 'entity':True, 'we_weight':0.1}
@@ -218,14 +218,17 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
     repeats = 50
 
     # rounds for alternating optimization
-    rounds = 5
+    rounds = 3
+
+    best_res = 0
 
     for rd in range(rounds):
 
         # step 1:
         # generate output of each meta-path
         for t in type_list:
-            print t
+            if not os.path.exists(pred_path + str(t)):
+                os.makedirs(pred_path + str(t))
             graph, newIds = GraphGenerator.getMetaPathGraph(hin,tf_param,t)
 
             newLabel = GraphGenerator.getNewLabels(hin)
@@ -234,19 +237,19 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
             # 3-class classification
 
             lb = 5
-            ssl = SSLClassifier(graph, newLabel, ['rec.autos','comp.os.ms-windows.misc','sci.space'], lp_param, repeatTimes=repeats, trainNumbers=lb,classCount=DIFF_count)
+            ssl = SSLClassifier(graph, newLabel, scope, lp_param, repeatTimes=repeats, trainNumbers=lb,classCount=count)
             if rd == 0:
                 ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
-                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path + 'lb' +
-                                                str(lb).zfill(3) + '_' + str(t))
+                                                      newIds=newIds, saveProb=True,
+                                                      savePathPrefix=pred_path + str(t) + '/lb' +str(lb).zfill(3))
             else:
-                with open('/home/hejiang/results/' + 'DIFF' + 'lb' + str(lb).zfill(3) + '_' + str(r).zfill(
-                        3) + '_pred_rd_' + str(rd-1).zfill(3)) as f:
-                    inputPred = pk.load(f)
+                inputPredPath = 'data/local/lpmeta/' + scope_name + '/lb' + str(lb).zfill(3) + '_pred_rd_' + str(rd-1).zfill(3)
                 ssl.repeatedFixedExpeimentwithInput(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
-                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path + 'lb' +
-                                                str(lb).zfill(3) + '_' + str(t),inputPred=inputPred)
-
+                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path + str(t) + '/lb' +
+                                                str(lb).zfill(3),inputPredPath=inputPredPath)
+            res = ssl.get_mean()
+            if res > best_res:
+                best_res = res
 
         # step 2:
         # propagate pseudo-label for other path
@@ -278,20 +281,13 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
                         for i,k in enumerate(testLabel.keys()):
                             typePred[k,:] = testPred[i,:]
 
-                            # some potential improvement: set a threshold for random walk number to block
-                            # 'unconfident' data points
-                        '''
-                            max = np.max(testPred[i,:])
-                            if max > threshold[str(t)]:
-                                label_file.write(str(t) + '\t' + str(k) + '\t' + v + '\n')
-                        '''
                     # add meta-path probability to global probability
                     outPred += typePred * weight[str(t)]
 
-                with open('/home/hejiang/results/' + 'DIFF' + 'lb' + str(lb).zfill(3) + '_' + str(r).zfill(
-                    3) + '_pred_rd_' + str(rd).zfill(3), 'w') as f:
+                with open('data/local/lpmeta/' + scope_name + '/lb' + str(lb).zfill(3) + '_pred_rd_' + str(rd).zfill(3)
+                                  + '_' + str(r).zfill(3), 'w') as f:
                     pk.dump(outPred,f)
-
+    return best_res
 
 
 def generate_meta_graph(scope, scope_name, type_list, count):
@@ -539,15 +535,11 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
             ssl = SSLClassifier(graph, newLabel, scope, lp_param, repeatTimes=repeats, trainNumbers=lb, classCount=count)
             if rd == 0:
                 ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
-                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path +
-                                                                                           str(t) + '/lb' + str(lb).zfill(3))
+                    newIds=newIds,saveProb=True,savePathPrefix=pred_path + str(t) + '/lb' + str(lb).zfill(3))
             else:
-                with open('data/local/cotrain/' + scope_name + '/lb' + str(lb).zfill(3) + '_' + str(r).zfill(
-                3) + '_pred_rd_' + str(rd-1).zfill(3)) as f:
-                    inputPred = pk.load(f)
+                inputPredPath = 'data/local/cotrain/' + scope_name + '/lb' + str(lb).zfill(3) + '_pred_rd_' + str(rd-1).zfill(3)
                 ssl.repeatedFixedExpeimentwithInput(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
-                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path + 'lb' +
-                                                                                           str(lb).zfill(3) + '_' + str(t),inputPred=inputPred)
+                    newIds=newIds,saveProb=True,savePathPrefix=pred_path + 'lb' + str(lb).zfill(3) + '_' + str(t), inputPredPath=inputPredPath)
             res = ssl.get_mean()
             if res > best_res:
                 best_res = res
@@ -595,10 +587,31 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
                     # add meta-path probability to global probability
                     outPred += typePred * weight[str(t)]
 
-                with open('data/local/cotrain/' + scope_name + '/lb' + str(lb).zfill(3) + '_' + str(r).zfill(
-                    3) + '_pred_rd_' + str(rd).zfill(3), 'w') as f:
+                with open('data/local/cotrain/' + scope_name + '/lb' + str(lb).zfill(3) + '_pred_rd_' + str(rd).zfill(3)
+                                  + '_' + str(r).zfill(3), 'w') as f:
                     pk.dump(outPred,f)
     return best_res
+
+
+def run_lp_meta():
+    # 20NG
+    for i in range(2):
+    #for i in [1]:
+        scope_name = ng20_scope_names[i]
+        scope = ng20_scopes[i]
+        count = ng20_counts[i]
+        print scope_name + ' lp meta'
+        result[i, 5] = lp_meta_experiment(scope, scope_name, NG20TypeList, NG20_threshold, NG20_weight, count)
+
+    # GCAT
+    for i in range(2):
+        scope_name = gcat_scope_names[i]
+        scope = gcat_scopes[i]
+        count = gcat_counts[i]
+        weight = GCAT_weight[i]
+        type_list = GCATTypeList[i]
+        print scope_name + ' lp meta'
+        result[i+2, 5] = lp_meta_experiment(scope, scope_name, type_list, GCAT_threshold, weight, count)
 
 
 def run_meta_graph_ensemble_svm():
@@ -826,6 +839,7 @@ def semihin_experiment(scope, scope_name, count, X, newIds):
     ssl.repeatedFixedExperimentwithNewIds(pathPrefix=experiment_path + 'lb' + str(lp).zfill(3) + '_', newIds=newIds)
     return ssl.get_mean()
 
+
 def run_semihin():
     # 20NG
     for i in range(2):
@@ -866,23 +880,28 @@ def run_semihin():
         print scope_name + ' semihin+entity'
         result[i+2, 7] = semihin_experiment(scope, scope_name, count, X, newIds)
 
+
 def print_result():
     print 'This is result in Latex format. Please run galm.sh/galm.bat and gal_result.py to get result for get-another-label ensemble.'
     s_list = ['20NG-SIM', '20NG-DIFF', 'GCAT-SIM', 'GCAT-DIFF']
+    print 'dataset & NB & NB+entity & SVM & SVM + entity & LP+entity & LP+metapath &'
     for j in range(4):
         s = s_list[j]
         for i in range(11):
-            s += ' & $%.2f%%$' % result[j, i]
+            s += ' & $%.2f%%$' % result[j, i] * 100
         print s
+
 
 def run_all_experiments():
     run_semihin()
     run_lp()
+    run_lp_meta()
     run_svm()
     run_nb()
     run_meta_graph_ensemble_svm()
     run_meta_graph_ensemble_gal()
     run_meta_graph_ensemble_cotrain()
+
 
 def run_all():
     dump_hin()
@@ -890,17 +909,8 @@ def run_all():
     run_laplacian_feature_search()
     run_generate_meta_graph()
     run_all_experiments()
-
+    print_result()
 
 #run_all()
-
-def all_in_one_run():
-    dump_hin()
-    generate_train_test_split()
-    run_generate_meta_graph()
-    run_meta_graph_ensemble_cotrain()
-
-#run_meta_graph_ensemble_gal()
-
-run_all_experiments()
+run_lp_meta()
 print_result()
