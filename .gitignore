@@ -6,7 +6,7 @@ temp/*
 svm\*.swp
 .idea
 local/*
-data/*
+data/local/*
 *.pyc
 wc
 wc_gcat

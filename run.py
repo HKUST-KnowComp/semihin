@@ -202,8 +202,95 @@ def lp_experiment(scope, scope_name, count, graph, labels, newIds):
     return ssl.get_mean()
 
 
-def lp_meta_experiment(scope, scope_name, count):
-    pass
+def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
+
+    pred_path = 'data/local/lpmeta/' + scope_name + '/'
+    if not os.path.exists(pred_path):
+        os.makedirs(pred_path)
+    split_path = 'data/local/split/' + scope_name + '/'
+
+    with open('data/local/' + scope_name + 'DIFF.dmp') as f:
+        hin = pk.load(f)
+
+    tf_param = {'word':True, 'entity':True, 'we_weight':0.1}
+    c = len(scope)
+    lb_cand = [5]
+    repeats = 50
+
+    # rounds for alternating optimization
+    rounds = 5
+
+    for rd in range(rounds):
+
+        # step 1:
+        # generate output of each meta-path
+        for t in type_list:
+            print t
+            graph, newIds = GraphGenerator.getMetaPathGraph(hin,tf_param,t)
+
+            newLabel = GraphGenerator.getNewLabels(hin)
+            lp_param = {'alpha':0.99,'normalization_factor':0.01}
+        #    lp_param = {'alpha':0.98, 'normalization_factor':5}
+            # 3-class classification
+
+            lb = 5
+            ssl = SSLClassifier(graph, newLabel, ['rec.autos','comp.os.ms-windows.misc','sci.space'], lp_param, repeatTimes=repeats, trainNumbers=lb,classCount=DIFF_count)
+            if rd == 0:
+                ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
+                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path + 'lb' +
+                                                str(lb).zfill(3) + '_' + str(t))
+            else:
+                with open('/home/hejiang/results/' + 'DIFF' + 'lb' + str(lb).zfill(3) + '_' + str(r).zfill(
+                        3) + '_pred_rd_' + str(rd-1).zfill(3)) as f:
+                    inputPred = pk.load(f)
+                ssl.repeatedFixedExpeimentwithInput(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
+                                                newIds=newIds,saveProb=True,savePathPrefix=pred_path + 'lb' +
+                                                str(lb).zfill(3) + '_' + str(t),inputPred=inputPred)
+
+
+        # step 2:
+        # propagate pseudo-label for other path
+        for lb in lb_cand:
+            results = []
+            for r in range(repeats):
+                with open(split_path + 'lb' + str(lb).zfill(3) + '_' + str(r).zfill(
+                        3) + '_train') as f:
+                    trainLabel = pk.load(f)
+                with open(split_path + 'lb' + str(lb).zfill(3) + '_' + str(r).zfill(
+                        3) + '_test') as f:
+                    testLabel = pk.load(f)
+
+                numTrain = len(trainLabel)
+                numTest = len(testLabel)
+                n = numTrain + numTest
+
+                # write get-another-label label file
+                outPred = np.zeros((n,c))
+                for t in type_list:
+                    typePred = np.zeros((n,c))
+                    with open(pred_path + str(t) + '/lb' + str(lb).zfill(3) + '_' + str(r).zfill(3) + '_train') as f:
+                        trainPred = pk.load(f)
+                        for i,k in enumerate(trainLabel.keys()):
+                            typePred[k,:] = trainPred[i,:]
+
+                    with open(pred_path + 'lb' + str(lb).zfill(3) + '_' + str(t) + '_' + str(r).zfill(3) + '_test') as f:
+                        testPred = pk.load(f)
+                        for i,k in enumerate(testLabel.keys()):
+                            typePred[k,:] = testPred[i,:]
+
+                            # some potential improvement: set a threshold for random walk number to block
+                            # 'unconfident' data points
+                        '''
+                            max = np.max(testPred[i,:])
+                            if max > threshold[str(t)]:
+                                label_file.write(str(t) + '\t' + str(k) + '\t' + v + '\n')
+                        '''
+                    # add meta-path probability to global probability
+                    outPred += typePred * weight[str(t)]
+
+                with open('/home/hejiang/results/' + 'DIFF' + 'lb' + str(lb).zfill(3) + '_' + str(r).zfill(
+                    3) + '_pred_rd_' + str(rd).zfill(3), 'w') as f:
+                    pk.dump(outPred,f)
 
 
 
@@ -583,7 +670,6 @@ def run_meta_graph_ensemble_cotrain():
         result[i+2, 10] = ensemble_cotrain_experiment(scope, scope_name, type_list, GCAT_threshold, weight, count)
 
 
-
 def run_generate_meta_graph():
     # 20NG
     for i in range(2):
@@ -642,6 +728,7 @@ def run_svm():
         y = GraphGenerator.gety(hin)
         result[i+2, 3] = svm_experiment(scope_name, X, y)
 
+
 def run_nb():
     # 20NG
     for i in range(2):
@@ -681,6 +768,7 @@ def run_nb():
             X = pk.load(f)
         y = GraphGenerator.gety(hin)
         result[i+2, 1] = svm_experiment(scope_name, X, y)
+
 
 def run_lp():
     # 20NG
@@ -779,6 +867,7 @@ def run_semihin():
         result[i+2, 7] = semihin_experiment(scope, scope_name, count, X, newIds)
 
 def print_result():
+    print 'This is result in Latex format. Please run galm.sh/galm.bat and gal_result.py to get result for get-another-label ensemble.'
     s_list = ['20NG-SIM', '20NG-DIFF', 'GCAT-SIM', 'GCAT-DIFF']
     for j in range(4):
         s = s_list[j]
