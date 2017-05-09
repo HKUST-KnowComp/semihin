@@ -3,9 +3,7 @@ GCAT.hin
 GCAT_modified.hin
 temp/*
 *.swp
-svm\*.swp
 .idea
-local/*
 data/local/*
 *.pyc
 wc

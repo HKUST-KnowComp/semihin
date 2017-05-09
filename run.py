@@ -669,7 +669,7 @@ def run_meta_graph_ensemble_cotrain():
         scope_name = ng20_scope_names[i]
         scope = ng20_scopes[i]
         count = ng20_counts[i]
-        print scope_name + ' gal ensemble'
+        print scope_name + ' cotrain ensemble'
         result[i, 10] = ensemble_cotrain_experiment(scope, scope_name, NG20TypeList, NG20_threshold, NG20_weight, count)
 
     # GCAT
@@ -679,7 +679,7 @@ def run_meta_graph_ensemble_cotrain():
         count = gcat_counts[i]
         weight = GCAT_weight[i]
         type_list = GCATTypeList[i]
-        print scope_name + ' gal ensemble'
+        print scope_name + ' cotrain ensemble'
         result[i+2, 10] = ensemble_cotrain_experiment(scope, scope_name, type_list, GCAT_threshold, weight, count)
 
 
@@ -698,7 +698,6 @@ def run_generate_meta_graph():
         count = gcat_counts[i]
         type_list = GCATTypeList[i]
         generate_meta_graph(scope, scope_name, type_list, count)
-
 
 
 def run_svm():
@@ -880,6 +879,10 @@ def run_semihin():
         print scope_name + ' semihin+entity'
         result[i+2, 7] = semihin_experiment(scope, scope_name, count, X, newIds)
 
+def dump_result():
+    with open('result', 'w') as f:
+        pk.dump(result, f)
+
 
 def print_result():
     print 'This is result in Latex format. Please run galm.sh/galm.bat and gal_result.py to get result for get-another-label ensemble.'
@@ -888,7 +891,7 @@ def print_result():
     for j in range(4):
         s = s_list[j]
         for i in range(11):
-            s += ' & $%.2f%%$' % result[j, i] * 100
+            s += ' & $%.2f%%$' % (result[j, i] * 100)
         print s
 
 
@@ -904,13 +907,14 @@ def run_all_experiments():
 
 
 def run_all():
-    dump_hin()
-    generate_train_test_split()
-    run_laplacian_feature_search()
-    run_generate_meta_graph()
+    #dump_hin()
+    #generate_train_test_split()
+    #run_laplacian_feature_search()
+    #run_generate_meta_graph()
     run_all_experiments()
     print_result()
+    dump_result()
 
-#run_all()
-run_lp_meta()
+run_all()
+#run_lp_meta()
 print_result()

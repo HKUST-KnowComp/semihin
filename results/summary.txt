@@ -3,66 +3,66 @@
 =============================================================
 
 === Parameters ===
-Input File: data/local/gal/GDIF/lb005_049_label.txt
-Categories File: galm/settings/GDIF_categories.txt
-Gold Labels File: data/local/gal/GDIF/lb005_049_gold.txt
-Cost File: galm/settings/GDIF_costs.txt
+Input File: data/local/gal/GSIM/lb005_040_label.txt
+Categories File: galm/settings/GSIM_categories.txt
+Gold Labels File: data/local/gal/GSIM/lb005_040_gold.txt
+Cost File: galm/settings/GSIM_costs.txt
 Evaluation File: N/A
 
 === Data ===
 Categories: 3
-Objects in Data Set: 2700
+Objects in Data Set: 3596
 Workers in Data Set: 8
-Labels Assigned by Workers: 14463
+Labels Assigned by Workers: 15333
 
 === Data Quality ===
-[DS_Pr[GODD]] DS estimate for prior probability of category GODD: 0.1443
-[DS_Pr[GDEF]] DS estimate for prior probability of category GDEF: 0.1847
-[DS_Pr[GENT]] DS estimate for prior probability of category GENT: 0.6709
-[MV_Pr[GODD]] Majority Vote estimate for prior probability of category GODD: 0.1399
-[MV_Pr[GDEF]] Majority Vote estimate for prior probability of category GDEF: 0.1892
-[MV_Pr[GENT]] Majority Vote estimate for prior probability of category GENT: 0.6710
-[DataCost_Estm_DS_Exp] Estimated classification cost (DS_Exp metric): 0.0148
-[DataCost_Estm_MV_Exp] Estimated classification cost (MV_Exp metric): 0.1344
-[DataCost_Estm_DS_ML] Estimated classification cost (DS_ML metric): 0.0098
-[DataCost_Estm_MV_ML] Estimated classification cost (MV_ML metric): 0.0989
-[DataCost_Estm_DS_Min] Estimated classification cost (DS_Min metric): 0.0098
-[DataCost_Estm_MV_Min] Estimated classification cost (MV_Min metric): 0.0989
-[DataCost_Estm_NoVote_Exp] Baseline classification cost (random spammer): 0.4949
-[DataCost_Estm_NoVote_Min] Baseline classification cost (strategic spammer): 0.3291
-[DataCost_Eval_DS_ML] Actual classification cost for EM, maximum likelihood classification: 0.3940
-[DataCost_Eval_MV_ML] Actual classification cost for majority vote classification: 0.4004
-[DataCost_Eval_DS_Min] Actual classification cost for EM, min-cost classification: 0.3940
-[DataCost_Eval_MV_Min] Actual classification cost for naive min-cost classification: 0.3978
-[DataCost_Eval_DS_Soft] Actual classification cost for EM, soft-label classification: 0.3963
-[DataCost_Eval_MV_Soft] Actual classification cost for naive soft-label classification: 0.4234
-[DataQuality_Estm_DS_ML] Estimated data quality, EM algorithm, maximum likelihood: 97.01%
-[DataQuality_Estm_MV_ML] Estimated data quality, naive majority label: 69.96%
-[DataQuality_Estm_DS_Exp] Estimated data quality, EM algorithm, soft label: 95.52%
-[DataQuality_Estm_MV_Exp] Estimated data quality, naive soft label: 59.17%
-[DataQuality_Estm_DS_Min] Estimated data quality, EM algorithm, mincost: 97.01%
-[DataQuality_Estm_MV_Min] Estimated data quality, naive mincost label: 69.96%
-[DataQuality_Eval_DS_ML] Actual data quality, EM algorithm, maximum likelihood: -19.74%
-[DataQuality_Eval_MV_ML] Actual data quality, naive majority label: -21.10%
-[DataQuality_Eval_DS_Min] Actual data quality, EM algorithm, mincost: -19.74%
-[DataQuality_Eval_MV_Min] Actual data quality, naive mincost label: -20.87%
-[DataQuality_Eval_DS_Soft] Actual data quality, EM algorithm, soft label: -20.43%
-[DataQuality_Eval_MV_Soft] Actual data quality, naive soft label: -28.65%
+[DS_Pr[GENV]] DS estimate for prior probability of category GENV: 0.2104
+[DS_Pr[GWEA]] DS estimate for prior probability of category GWEA: 0.2948
+[DS_Pr[GDIS]] DS estimate for prior probability of category GDIS: 0.4948
+[MV_Pr[GENV]] Majority Vote estimate for prior probability of category GENV: 0.2255
+[MV_Pr[GWEA]] Majority Vote estimate for prior probability of category GWEA: 0.2862
+[MV_Pr[GDIS]] Majority Vote estimate for prior probability of category GDIS: 0.4883
+[DataCost_Estm_DS_Exp] Estimated classification cost (DS_Exp metric): 0.0706
+[DataCost_Estm_MV_Exp] Estimated classification cost (MV_Exp metric): 0.1503
+[DataCost_Estm_DS_ML] Estimated classification cost (DS_ML metric): 0.0470
+[DataCost_Estm_MV_ML] Estimated classification cost (MV_ML metric): 0.1180
+[DataCost_Estm_DS_Min] Estimated classification cost (DS_Min metric): 0.0470
+[DataCost_Estm_MV_Min] Estimated classification cost (MV_Min metric): 0.1180
+[DataCost_Estm_NoVote_Exp] Baseline classification cost (random spammer): 0.6240
+[DataCost_Estm_NoVote_Min] Baseline classification cost (strategic spammer): 0.5052
+[DataCost_Eval_DS_ML] Actual classification cost for EM, maximum likelihood classification: 0.2111
+[DataCost_Eval_MV_ML] Actual classification cost for majority vote classification: 0.2184
+[DataCost_Eval_DS_Min] Actual classification cost for EM, min-cost classification: 0.2111
+[DataCost_Eval_MV_Min] Actual classification cost for naive min-cost classification: 0.2281
+[DataCost_Eval_DS_Soft] Actual classification cost for EM, soft-label classification: 0.2267
+[DataCost_Eval_MV_Soft] Actual classification cost for naive soft-label classification: 0.2549
+[DataQuality_Estm_DS_ML] Estimated data quality, EM algorithm, maximum likelihood: 90.69%
+[DataQuality_Estm_MV_ML] Estimated data quality, naive majority label: 76.64%
+[DataQuality_Estm_DS_Exp] Estimated data quality, EM algorithm, soft label: 86.03%
+[DataQuality_Estm_MV_Exp] Estimated data quality, naive soft label: 70.26%
+[DataQuality_Estm_DS_Min] Estimated data quality, EM algorithm, mincost: 90.69%
+[DataQuality_Estm_MV_Min] Estimated data quality, naive mincost label: 76.64%
+[DataQuality_Eval_DS_ML] Actual data quality, EM algorithm, maximum likelihood: 58.21%
+[DataQuality_Eval_MV_ML] Actual data quality, naive majority label: 57.05%
+[DataQuality_Eval_DS_Min] Actual data quality, EM algorithm, mincost: 58.21%
+[DataQuality_Eval_MV_Min] Actual data quality, naive mincost label: 54.84%
+[DataQuality_Eval_DS_Soft] Actual data quality, EM algorithm, soft label: 55.14%
+[DataQuality_Eval_MV_Soft] Actual data quality, naive soft label: 49.55%
 
 === Worker Quality ===
-[WorkerQuality_Estm_DS_Exp_n] Estimated worker quality (non-weighted, DS_Exp metric): 46.44%
-[WorkerQuality_Estm_DS_Exp_w] Estimated worker quality (weighted, DS_Exp metric): 40.76%
-[WorkerQuality_Estm_DS_ML_n] Estimated worker quality (non-weighted, DS_ML metric): 63.66%
-[WorkerQuality_Estm_DS_ML_w] Estimated worker quality (weighted, DS_ML metric): 64.41%
-[WorkerQuality_Estm_DS_Min_n] Estimated worker quality (non-weighted, DS_Min metric): 63.66%
-[WorkerQuality_Estm_DS_Min_w] Estimated worker quality (weighted, DS_Min metric): 64.41%
-[WorkerQuality_Eval_DS_Exp_n] Actual worker quality (non-weighted, DS_Exp metric): -11.74%
-[WorkerQuality_Eval_DS_Exp_w] Actual worker quality (weighted, DS_Exp metric): -7.64%
-[WorkerQuality_Eval_DS_ML_n] Actual worker quality (non-weighted, DS_ML metric): 27.52%
-[WorkerQuality_Eval_DS_ML_w] Actual worker quality (weighted, DS_ML metric): 31.17%
-[WorkerQuality_Eval_DS_Min_n] Actual worker quality (non-weighted, DS_Min metric): 27.52%
-[WorkerQuality_Eval_DS_Min_w] Actual worker quality (weighted, DS_Min metric): 31.17%
-[Number of labels] Labels per worker: 1807.8750
+[WorkerQuality_Estm_DS_Exp_n] Estimated worker quality (non-weighted, DS_Exp metric): 58.90%
+[WorkerQuality_Estm_DS_Exp_w] Estimated worker quality (weighted, DS_Exp metric): 39.41%
+[WorkerQuality_Estm_DS_ML_n] Estimated worker quality (non-weighted, DS_ML metric): 75.68%
+[WorkerQuality_Estm_DS_ML_w] Estimated worker quality (weighted, DS_ML metric): 63.39%
+[WorkerQuality_Estm_DS_Min_n] Estimated worker quality (non-weighted, DS_Min metric): 75.68%
+[WorkerQuality_Estm_DS_Min_w] Estimated worker quality (weighted, DS_Min metric): 63.39%
+[WorkerQuality_Eval_DS_Exp_n] Actual worker quality (non-weighted, DS_Exp metric): 33.27%
+[WorkerQuality_Eval_DS_Exp_w] Actual worker quality (weighted, DS_Exp metric): 23.78%
+[WorkerQuality_Eval_DS_ML_n] Actual worker quality (non-weighted, DS_ML metric): 57.48%
+[WorkerQuality_Eval_DS_ML_w] Actual worker quality (weighted, DS_ML metric): 50.52%
+[WorkerQuality_Eval_DS_Min_n] Actual worker quality (non-weighted, DS_Min metric): 57.48%
+[WorkerQuality_Eval_DS_Min_w] Actual worker quality (weighted, DS_Min metric): 50.52%
+[Number of labels] Labels per worker: 1916.6250
 [Gold Tests] Gold tests per worker: 15.0000
 
 =============================================================
