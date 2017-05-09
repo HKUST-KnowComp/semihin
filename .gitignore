@@ -10,3 +10,7 @@ data/*
 *.pyc
 wc
 wc_gcat
+galm/results/*
+galm.bat
+galm.sh
+results/*

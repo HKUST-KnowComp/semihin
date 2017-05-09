@@ -306,26 +306,13 @@ class GraphGenerator:
                 graph[j, i] += 1
         toc = time.time() - tic
 
-        '''
-        with open('/home/hejiang/results/DIFF_lb001_001_test') as f:
-            oldLabel = pk.load(f)
-            label = {}
-            for (k,v) in oldLabel.items():
-                label[newIds[k]] = v
-        
-        number = 1123
-
-        print 'origin %s' % label[number]
-        for l in np.array(np.where(graph[number] > 0)[0]).tolist():
-            print label[int(l)]
-        '''
         return sparse.csc_matrix(graph), newIds
 
     @staticmethod
     def generateCosineNeighborGraphfromX(X, kNeighbors=10):
         cosX = cosine_similarity(X)
         # return sparse.csc_matrix(X.dot(X.transpose())),newIds
-        print cosX.shape
+        #print cosX.shape
         n = cosX.shape[0]
         graph = np.zeros((n, n))
         tic = time.time()
@@ -338,7 +325,7 @@ class GraphGenerator:
                 graph[i, j] += 1
                 graph[j, i] += 1
         toc = time.time() - tic
-        print 'graph generation done in %f seconds.' % toc
+        #print 'graph generation done in %f seconds.' % toc
         return sparse.csc_matrix(graph)
 
     @staticmethod

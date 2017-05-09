@@ -40,8 +40,8 @@ SIM_weight = {'[\'sports\', \'automotive\']':0.1,
                   '[\'business\']': 0.05
               }
 
-def NG20SIMMetaPaths():
-    experiment_path = '/home/hejiang/results/SIM_'
+def NG20SIMMetaGraphs():
+    experiment_path = 'data/local/metagraph/'
 
     with open('/home/data/corpora/HIN/dump/SIM.dmp') as f:
         hin = pk.load(f)

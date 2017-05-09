@@ -12,7 +12,7 @@ for lb in range(1,11):
     results = []
     for r in range(50):
         # read get-another file
-        result_file = open('/home/hejiang/results/gal/' + scope_name + '_lb' + str(lb).zfill(3) + '_' +
+        result_file = open('data/' + scope_name + '_lb' + str(lb).zfill(3) + '_' +
                          str(r).zfill(3) + '_result.txt')
         loss = []
         for line in result_file.readlines():

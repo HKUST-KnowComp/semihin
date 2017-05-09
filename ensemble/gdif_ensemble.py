@@ -29,16 +29,6 @@ GDIFTypeList = [['military','sports'],
                 ['government'],
                 ['religion','computer','aviation']]
 
-GDIF_threshold = {'[\'military\',\'sports\']':1e-3,
-                '\[\'medicine\'\]':1e-3,
-                '[]':-1,
-                '[\'astronomy\',\'spaceflight\',\'automotive\']':1e-5,
-                '[\'location\']':1e-3,
-                '[\'organization\']':1e-3,
-                '[\'organization.organization_sector\']':1e-5,
-                '[\'government\']':1e-3,
-                '[\'religion\',\'computer\',\'aviation\']':1e-5
-                }
 GDIF_weight = {'[\'military\',\'sports\']':0.1,
                 '\[\'medicine\'\]':0.1,
                 '[]':0.5,

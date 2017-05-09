@@ -1,0 +1,9 @@
+comp.graphics	comp.graphics	0
+comp.graphics	comp.sys.mac.hardware	1
+comp.graphics	comp.os.ms-windows.misc	1
+comp.sys.mac.hardware	comp.graphics	1
+comp.sys.mac.hardware	comp.sys.mac.hardware	0
+comp.sys.mac.hardware	comp.os.ms-windows.misc	1
+comp.os.ms-windows.misc	comp.graphics	1
+comp.os.ms-windows.misc	comp.sys.mac.hardware	1
+comp.os.ms-windows.misc	comp.os.ms-windows.misc	0

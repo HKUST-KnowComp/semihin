@@ -1,9 +1,0 @@
-Worker	WorkerQuality_Estm_DS_Exp_n	WorkerQuality_Estm_DS_Exp_w	WorkerQuality_Estm_DS_ML_n	WorkerQuality_Estm_DS_ML_w	WorkerQuality_Estm_DS_Min_n	WorkerQuality_Estm_DS_Min_w	WorkerQuality_Eval_DS_Exp_n	WorkerQuality_Eval_DS_Exp_w	WorkerQuality_Eval_DS_ML_n	WorkerQuality_Eval_DS_ML_w	WorkerQuality_Eval_DS_Min_n	WorkerQuality_Eval_DS_Min_w	Number of labels	Gold Tests
-alpha_0.5_type__scope_hard_label_percentage_0.6_	78.95%	78.95%	88.82%	88.82%	88.82%	88.82%	52.99%	52.99%	73.07%	73.07%	73.07%	73.07%	3000.0000	1739.0000
-alpha_0.5_type_astronomy_scope_hard_label_percentage_0.6_	98.92%	98.92%	99.46%	99.46%	99.46%	99.46%	48.78%	48.78%	70.70%	70.70%	70.70%	70.70%	3000.0000	1739.0000
-alpha_0.5_type_automotive_scope_hard_label_percentage_0.6_	99.18%	99.18%	99.59%	99.59%	99.59%	99.59%	49.47%	49.47%	71.19%	71.19%	71.19%	71.19%	3000.0000	1739.0000
-alpha_0.5_type_business_scope_hard_label_percentage_0.6_	91.08%	91.08%	95.43%	95.43%	95.43%	95.43%	48.35%	48.35%	70.30%	70.30%	70.30%	70.30%	3000.0000	1739.0000
-alpha_0.5_type_computer_scope_hard_label_percentage_0.6_	84.32%	84.32%	91.81%	91.81%	91.81%	91.81%	51.37%	51.37%	72.38%	72.38%	72.38%	72.38%	3000.0000	1739.0000
-alpha_0.5_type_government_scope_hard_label_percentage_0.6_	96.80%	96.80%	98.39%	98.39%	98.39%	98.39%	49.68%	49.68%	71.39%	71.39%	71.39%	71.39%	3000.0000	1739.0000
-alpha_0.5_type_organization_scope_hard_label_percentage_0.6_	87.35%	87.35%	93.46%	93.46%	93.46%	93.46%	41.08%	41.08%	64.99%	64.99%	64.99%	64.99%	3000.0000	1739.0000
-alpha_0.5_type_spaceflight_scope_hard_label_percentage_0.6_	99.22%	99.22%	99.61%	99.61%	99.61%	99.61%	49.13%	49.13%	70.95%	70.95%	70.95%	70.95%	3000.0000	1739.0000

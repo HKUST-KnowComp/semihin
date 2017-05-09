@@ -189,3 +189,6 @@ class SSLClassifier:
         mean = np.mean(self.results)
         std = np.std(self.results)
         print str(mean) + '\t' + str(std)
+
+    def get_mean(self):
+        return np.mean(self.results)
