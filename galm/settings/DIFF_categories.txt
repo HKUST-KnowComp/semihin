@@ -1,0 +1,3 @@
+rec.autos
+comp.os.ms-windows.misc
+sci.space

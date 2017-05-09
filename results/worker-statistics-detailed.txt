@@ -1,0 +1,192 @@
+Worker: ['astronomy', 'spaceflight', 'automotive']
+WorkerQuality_Estm_DS_Exp_n: 64.94%
+WorkerQuality_Estm_DS_Exp_w: 64.94%
+WorkerQuality_Estm_DS_ML_n: 81.08%
+WorkerQuality_Estm_DS_ML_w: 81.08%
+WorkerQuality_Estm_DS_Min_n: 81.08%
+WorkerQuality_Estm_DS_Min_w: 81.08%
+WorkerQuality_Eval_DS_Exp_n: -3.11%
+WorkerQuality_Eval_DS_Exp_w: -3.11%
+WorkerQuality_Eval_DS_ML_n: 34.37%
+WorkerQuality_Eval_DS_ML_w: 34.37%
+WorkerQuality_Eval_DS_Min_n: 34.37%
+WorkerQuality_Eval_DS_Min_w: 34.37%
+Number of labels: 2700.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=90.627%	P[GODD->GDEF]=1.211%	P[GODD->GENT]=8.162%	
+P[GDEF->GODD]=1.581%	P[GDEF->GDEF]=90.025%	P[GDEF->GENT]=8.394%	
+P[GENT->GODD]=3.354%	P[GENT->GDEF]=1.164%	P[GENT->GENT]=95.481%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=26.031%	P[GODD->GDEF]=8.891%	P[GODD->GENT]=65.078%	
+P[GDEF->GODD]=9.497%	P[GDEF->GDEF]=67.412%	P[GDEF->GENT]=23.091%	
+P[GENT->GODD]=6.623%	P[GENT->GDEF]=1.703%	P[GENT->GENT]=91.675%	
+
+Worker: ['government']
+WorkerQuality_Estm_DS_Exp_n: 62.49%
+WorkerQuality_Estm_DS_Exp_w: 62.49%
+WorkerQuality_Estm_DS_ML_n: 49.53%
+WorkerQuality_Estm_DS_ML_w: 49.53%
+WorkerQuality_Estm_DS_Min_n: 49.53%
+WorkerQuality_Estm_DS_Min_w: 49.53%
+WorkerQuality_Eval_DS_Exp_n: -26.59%
+WorkerQuality_Eval_DS_Exp_w: -26.59%
+WorkerQuality_Eval_DS_ML_n: 18.99%
+WorkerQuality_Eval_DS_ML_w: 18.99%
+WorkerQuality_Eval_DS_Min_n: 18.99%
+WorkerQuality_Eval_DS_Min_w: 18.99%
+Number of labels: 71.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=100.0%	P[GODD->GDEF]=0.0%	P[GODD->GENT]=0.0%	
+P[GDEF->GODD]=11.765%	P[GDEF->GDEF]=88.235%	P[GDEF->GENT]=0.0%	
+P[GENT->GODD]=29.95%	P[GENT->GDEF]=0.0%	P[GENT->GENT]=70.05%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=95.0%	P[GODD->GDEF]=0.0%	P[GODD->GENT]=5.0%	
+P[GDEF->GODD]=35.294%	P[GDEF->GDEF]=52.941%	P[GDEF->GENT]=11.765%	
+P[GENT->GODD]=63.158%	P[GENT->GDEF]=5.263%	P[GENT->GENT]=31.579%	
+
+Worker: ['location']
+WorkerQuality_Estm_DS_Exp_n: 21.10%
+WorkerQuality_Estm_DS_Exp_w: 21.10%
+WorkerQuality_Estm_DS_ML_n: 49.37%
+WorkerQuality_Estm_DS_ML_w: 49.37%
+WorkerQuality_Estm_DS_Min_n: 49.37%
+WorkerQuality_Estm_DS_Min_w: 49.37%
+WorkerQuality_Eval_DS_Exp_n: -13.44%
+WorkerQuality_Eval_DS_Exp_w: -13.44%
+WorkerQuality_Eval_DS_ML_n: 24.40%
+WorkerQuality_Eval_DS_ML_w: 24.40%
+WorkerQuality_Eval_DS_Min_n: 24.40%
+WorkerQuality_Eval_DS_Min_w: 24.40%
+Number of labels: 1974.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=78.736%	P[GODD->GDEF]=6.299%	P[GODD->GENT]=14.965%	
+P[GDEF->GODD]=11.541%	P[GDEF->GDEF]=80.051%	P[GDEF->GENT]=8.408%	
+P[GENT->GODD]=9.669%	P[GENT->GDEF]=5.1%	P[GENT->GENT]=85.231%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=30.081%	P[GODD->GDEF]=9.268%	P[GODD->GENT]=60.65%	
+P[GDEF->GODD]=17.131%	P[GDEF->GDEF]=62.099%	P[GDEF->GENT]=20.771%	
+P[GENT->GODD]=10.148%	P[GENT->GDEF]=5.131%	P[GENT->GENT]=84.721%	
+
+Worker: ['medicine']
+WorkerQuality_Estm_DS_Exp_n: 77.30%
+WorkerQuality_Estm_DS_Exp_w: 77.30%
+WorkerQuality_Estm_DS_ML_n: 89.16%
+WorkerQuality_Estm_DS_ML_w: 89.16%
+WorkerQuality_Estm_DS_Min_n: 89.16%
+WorkerQuality_Estm_DS_Min_w: 89.16%
+WorkerQuality_Eval_DS_Exp_n: -0.45%
+WorkerQuality_Eval_DS_Exp_w: -0.45%
+WorkerQuality_Eval_DS_ML_n: 38.09%
+WorkerQuality_Eval_DS_ML_w: 38.09%
+WorkerQuality_Eval_DS_Min_n: 38.09%
+WorkerQuality_Eval_DS_Min_w: 38.09%
+Number of labels: 1567.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=90.581%	P[GODD->GDEF]=0.541%	P[GODD->GENT]=8.878%	
+P[GDEF->GODD]=0.694%	P[GDEF->GDEF]=95.678%	P[GDEF->GENT]=3.628%	
+P[GENT->GODD]=1.885%	P[GENT->GDEF]=0.216%	P[GENT->GENT]=97.899%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=23.0%	P[GODD->GDEF]=5.0%	P[GODD->GENT]=72.0%	
+P[GDEF->GODD]=8.6%	P[GDEF->GDEF]=72.236%	P[GDEF->GENT]=19.165%	
+P[GENT->GODD]=5.772%	P[GENT->GDEF]=1.208%	P[GENT->GENT]=93.02%	
+
+Worker: ['military', 'sports']
+WorkerQuality_Estm_DS_Exp_n: 33.78%
+WorkerQuality_Estm_DS_Exp_w: 33.78%
+WorkerQuality_Estm_DS_ML_n: 61.47%
+WorkerQuality_Estm_DS_ML_w: 61.47%
+WorkerQuality_Estm_DS_Min_n: 61.47%
+WorkerQuality_Estm_DS_Min_w: 61.47%
+WorkerQuality_Eval_DS_Exp_n: -7.23%
+WorkerQuality_Eval_DS_Exp_w: -7.23%
+WorkerQuality_Eval_DS_ML_n: 31.09%
+WorkerQuality_Eval_DS_ML_w: 31.09%
+WorkerQuality_Eval_DS_Min_n: 31.09%
+WorkerQuality_Eval_DS_Min_w: 31.09%
+Number of labels: 2698.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=61.628%	P[GODD->GDEF]=14.007%	P[GODD->GENT]=24.364%	
+P[GDEF->GODD]=1.887%	P[GDEF->GDEF]=88.55%	P[GDEF->GENT]=9.563%	
+P[GENT->GODD]=1.131%	P[GENT->GDEF]=6.359%	P[GENT->GENT]=92.509%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=17.156%	P[GODD->GDEF]=13.853%	P[GODD->GENT]=68.991%	
+P[GDEF->GODD]=7.076%	P[GDEF->GDEF]=74.302%	P[GDEF->GENT]=18.622%	
+P[GENT->GODD]=4.261%	P[GENT->GDEF]=5.208%	P[GENT->GENT]=90.53%	
+
+Worker: ['organization']
+WorkerQuality_Estm_DS_Exp_n: 55.29%
+WorkerQuality_Estm_DS_Exp_w: 55.29%
+WorkerQuality_Estm_DS_ML_n: 66.58%
+WorkerQuality_Estm_DS_ML_w: 66.58%
+WorkerQuality_Estm_DS_Min_n: 66.58%
+WorkerQuality_Estm_DS_Min_w: 66.58%
+WorkerQuality_Eval_DS_Exp_n: -23.79%
+WorkerQuality_Eval_DS_Exp_w: -23.79%
+WorkerQuality_Eval_DS_ML_n: 12.36%
+WorkerQuality_Eval_DS_ML_w: 12.36%
+WorkerQuality_Eval_DS_Min_n: 12.36%
+WorkerQuality_Eval_DS_Min_w: 12.36%
+Number of labels: 53.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=85.721%	P[GODD->GDEF]=14.279%	P[GODD->GENT]=0.0%	
+P[GDEF->GODD]=0.001%	P[GDEF->GDEF]=99.999%	P[GDEF->GENT]=0.0%	
+P[GENT->GODD]=9.989%	P[GENT->GDEF]=3.334%	P[GENT->GENT]=86.677%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=42.857%	P[GODD->GDEF]=14.286%	P[GODD->GENT]=42.857%	
+P[GDEF->GODD]=0.0%	P[GDEF->GDEF]=69.231%	P[GDEF->GENT]=30.769%	
+P[GENT->GODD]=5.556%	P[GENT->GDEF]=16.667%	P[GENT->GENT]=77.778%	
+
+Worker: ['religion', 'computer', 'aviation']
+WorkerQuality_Estm_DS_Exp_n: 63.41%
+WorkerQuality_Estm_DS_Exp_w: 63.41%
+WorkerQuality_Estm_DS_ML_n: 80.09%
+WorkerQuality_Estm_DS_ML_w: 80.09%
+WorkerQuality_Estm_DS_Min_n: 80.09%
+WorkerQuality_Estm_DS_Min_w: 80.09%
+WorkerQuality_Eval_DS_Exp_n: -3.64%
+WorkerQuality_Eval_DS_Exp_w: -3.64%
+WorkerQuality_Eval_DS_ML_n: 32.90%
+WorkerQuality_Eval_DS_ML_w: 32.90%
+WorkerQuality_Eval_DS_Min_n: 32.90%
+WorkerQuality_Eval_DS_Min_w: 32.90%
+Number of labels: 2700.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=90.156%	P[GODD->GDEF]=0.784%	P[GODD->GENT]=9.06%	
+P[GDEF->GODD]=2.702%	P[GDEF->GDEF]=90.125%	P[GDEF->GENT]=7.173%	
+P[GENT->GODD]=3.392%	P[GENT->GDEF]=1.536%	P[GENT->GENT]=95.071%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=26.398%	P[GODD->GDEF]=9.166%	P[GODD->GENT]=64.436%	
+P[GDEF->GODD]=11.173%	P[GDEF->GDEF]=66.853%	P[GDEF->GENT]=21.974%	
+P[GENT->GODD]=6.149%	P[GENT->GDEF]=2.271%	P[GENT->GENT]=91.58%	
+
+Worker: []
+WorkerQuality_Estm_DS_Exp_n: -6.78%
+WorkerQuality_Estm_DS_Exp_w: -6.78%
+WorkerQuality_Estm_DS_ML_n: 31.97%
+WorkerQuality_Estm_DS_ML_w: 31.97%
+WorkerQuality_Estm_DS_Min_n: 31.97%
+WorkerQuality_Estm_DS_Min_w: 31.97%
+WorkerQuality_Eval_DS_Exp_n: -15.70%
+WorkerQuality_Eval_DS_Exp_w: -15.70%
+WorkerQuality_Eval_DS_ML_n: 27.93%
+WorkerQuality_Eval_DS_ML_w: 27.93%
+WorkerQuality_Eval_DS_Min_n: 27.93%
+WorkerQuality_Eval_DS_Min_w: 27.93%
+Number of labels: 2700.0000
+Gold Tests: 15.0000
+Estimated Confusion Matrix:
+P[GODD->GODD]=43.618%	P[GODD->GDEF]=8.972%	P[GODD->GENT]=47.41%	
+P[GDEF->GODD]=4.498%	P[GDEF->GDEF]=68.666%	P[GDEF->GENT]=26.837%	
+P[GENT->GODD]=6.453%	P[GENT->GDEF]=6.156%	P[GENT->GENT]=87.391%	
+Actual Confusion Matrix (evaluation data):
+P[GODD->GODD]=15.032%	P[GODD->GDEF]=9.074%	P[GODD->GENT]=75.894%	
+P[GDEF->GODD]=9.497%	P[GDEF->GDEF]=63.501%	P[GDEF->GENT]=27.002%	
+P[GENT->GODD]=8.325%	P[GENT->GDEF]=3.784%	P[GENT->GENT]=87.89%	
+

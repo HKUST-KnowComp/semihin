@@ -1,0 +1,9 @@
+rec.autos	rec.autos	0
+rec.autos	comp.os.ms-windows.misc	1
+rec.autos	sci.space	1
+comp.os.ms-windows.misc	rec.autos	1
+comp.os.ms-windows.misc	comp.os.ms-windows.misc	0
+comp.os.ms-windows.misc	sci.space	1
+sci.space	rec.autos	1
+sci.space	comp.os.ms-windows.misc	1
+sci.space	sci.space	0

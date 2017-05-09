@@ -1,0 +1,3 @@
+comp.graphics
+comp.sys.mac.hardware
+comp.os.ms-windows.misc
