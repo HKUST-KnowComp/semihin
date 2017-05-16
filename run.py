@@ -3,6 +3,9 @@ from classifier import SSLClassifier
 from graphgenerator import GraphGenerator
 from sklearn.svm import LinearSVC
 from sklearn.naive_bayes import GaussianNB
+from features.feature_grid_search import generate_laplacian_score_scalar as generate_laplacian_score
+from sklearn.metrics.pairwise import cosine_similarity
+
 import scipy.sparse as sparse
 import numpy as np
 import cPickle as pk
@@ -21,14 +24,14 @@ GSIM_count = {'GWEA':1014,'GDIS':2083,'GENV':499}
 GDIF_count = {'GENT':1062,'GODD':1096,'GDEF':542}
 
 # meta-graph type list
-NG20TypeList = [['organization'],['business'],['astronomy','spaceflight'], ['computer'],['sports','automotive'],['medicine','organization','biology','business'],['computer','astronomy','spaceflight','automotive']]
+NG20TypeList = [['organization'],['business'],['astronomy','spaceflight'], ['computer'],['sports','automotive'],['medicine','organization','biology','business'],['computer','astronomy','spaceflight','automotive'], [''], ['location']]
 GDIFTypeList = [['military','sports'],['medicine'],[],['astronomy','spaceflight','automotive'],['location'],['organization'],['government'],['religion','computer','aviation']]
 GSIMTypeList = [['military','sports'],['medicine'],[],['astronomy','spaceflight','automotive'],['location'],['location','organization'],['organization'],['government']]
 GCATTypeList = [GSIMTypeList, GDIFTypeList]
 # threshold and path weights
-NG20_threshold = {'[\'sports\', \'automotive\']':1e-3,'[\'computer\']':1e-4,'[\'medicine\', \'organization\', \'biology\', \'business\']':1e-3,'[\'computer\', \'astronomy\', \'spaceflight\', \'automotive\']':-1,'[\'astronomy\', \'spaceflight\']':1e-3,'[\'organization\']':1e-3,'[\'business\']':1e-3}
+NG20_threshold = {'[\'sports\', \'automotive\']':1e-3,'[\'computer\']':1e-4,'[\'medicine\', \'organization\', \'biology\', \'business\']':1e-3,'[\'computer\', \'astronomy\', \'spaceflight\', \'automotive\']':-1,'[\'astronomy\', \'spaceflight\']':1e-3,'[\'organization\']':1e-4,'[\'business\']':1e-4, '[\'\']': 1e-6, '[\'location\']': 1e-4}
 GCAT_threshold = {'[\'military\', \'sports\']':1e-4,'[\'medicine\']':1e-3,'[]':1e-4,'[\'astronomy\', \'spaceflight\', \'automotive\']':0,'[\'location\']':1e-3,'[\'location\', \'organization\']':1e-2,'[\'organization\']':1e-2,'[\'government\']':1e-2, '[\'religion\', \'computer\', \'aviation\']':1e-6}
-NG20_weight = {'[\'sports\', \'automotive\']':0.1,'[\'computer\']':0.5,'[\'medicine\', \'organization\', \'biology\', \'business\']':0.2,'[\'computer\', \'astronomy\', \'spaceflight\', \'automotive\']':0.5,'[\'astronomy\', \'spaceflight\']':0.1,'[\'organization\']':0.05,'[\'business\']': 0.05}
+NG20_weight = {'[\'sports\', \'automotive\']':0.1,'[\'computer\']':0.5,'[\'medicine\', \'organization\', \'biology\', \'business\']':0.2,'[\'computer\', \'astronomy\', \'spaceflight\', \'automotive\']':0.5,'[\'astronomy\', \'spaceflight\']':0.1,'[\'organization\']':0.05,'[\'business\']': 0.05, '[\'\']': 0.4, '[\'location\']': 0.1}
 GSIM_weight = {'[\'military\', \'sports\']':0.01,'[\'medicine\']':0.1,'[]':0.02,'[\'astronomy\', \'spaceflight\', \'automotive\']':0.3,'[\'location\']':0.02,'[\'location\', \'organization\']':0.01,'[\'organization\']':0.01,'[\'government\']':0.01}
 GDIF_weight = {'[\'military\', \'sports\']':0.01,'[\'medicine\']':0.1,'[]':0.02,'[\'astronomy\', \'spaceflight\', \'automotive\']':0.3,'[\'location\']':0.02,'[\'location\', \'organization\']':0.01,'[\'organization\']':0.01,'[\'government\']':0.01, '[\'religion\', \'computer\', \'aviation\']':0.1}
 GCAT_weight = [GSIM_weight, GDIF_weight]
@@ -155,8 +158,6 @@ def svm_experiment(scope_name, X, y):
 
             # train
             clf = LinearSVC(C=0.01)
-            #clf = LogisticRegression(C=0.01)
-            #clf = MultinomialNB()
             clf.fit(XTrain, yTrain)
 
             # test
@@ -176,13 +177,18 @@ def nb_experiment(scope_name, X, y):
                     3) + '_test') as f:
                 testLabel = pk.load(f)
 
-            XTrain = X[trainLabel.keys()].toarray()
-            XTest = X[testLabel.keys()].toarray()
+            XTrain = X[trainLabel.keys()]
+            XTest = X[testLabel.keys()]
+            if not isinstance(XTrain, np.ndarray):
+                XTrain = XTrain.toarray()
+                XTest = XTest.toarray()
             yTrain = y[trainLabel.keys()]
             yTest = y[testLabel.keys()]
 
             # train
+            #clf = MultinomialNB()
             clf = GaussianNB()
+            #clf = BernoulliNB()
             clf.fit(XTrain, yTrain)
 
             # test
@@ -193,8 +199,7 @@ def nb_experiment(scope_name, X, y):
 
 def lp_experiment(scope, scope_name, count, graph, labels, newIds):
     experiment_path = 'data/local/split/' + scope_name + '/'
-    lp_param = {'alpha': 0.99, 'normalization_factor': 0.01}
-    #    lp_param = {'alpha':0.98, 'normalization_factor':5}
+    lp_param = {'alpha':0.98, 'normalization_factor':5}
     lp = 5
     ssl = SSLClassifier(graph, labels, scope, lp_param, repeatTimes=50, trainNumbers=lp, classCount=count)
     ssl.repeatedFixedExperimentwithNewIds(pathPrefix=experiment_path + 'lb' + str(lp).zfill(3) + '_', newIds=newIds)
@@ -320,7 +325,6 @@ def generate_meta_graph(scope, scope_name, type_list, count):
             if not os.path.exists(pred_path + str(t) + '/'):
                 os.makedirs(pred_path + str(t) + '/')
             ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lp).zfill(3) + '_',newIds=newIds, saveProb=True,savePathPrefix=pred_path + str(t) + '/' + 'lb' + str(lp).zfill(3))
-            #ssl.stats()
 
 
 def ensemble_svm_experiment(scope, scope_name, type_list, threshold):
@@ -527,8 +531,8 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
             graph = sparse.csc_matrix(graph)
 
             newLabel = GraphGenerator.getNewLabels(hin)
-            lp_param = {'alpha':0.99,'normalization_factor':0.01}
-            # lp_param = {'alpha':0.98, 'normalization_factor':5}
+            #lp_param = {'alpha':0.99,'normalization_factor':0.01}
+            lp_param = {'alpha': 0.98, 'normalization_factor': 5, 'method': 'variant'}
 
             lb = 5
             ssl = SSLClassifier(graph, newLabel, scope, lp_param, repeatTimes=repeats, trainNumbers=lb, classCount=count)
@@ -590,6 +594,47 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
                                   + '_' + str(r).zfill(3), 'w') as f:
                     pk.dump(outPred,f)
     return best_res
+
+
+def knowsim_experiment(scope, scope_name, type_list, count, newLabels, tau=1, kNeighbors=100):
+    split_path = 'data/local/split/' + scope_name + '/'
+    with open('data/local/' + scope_name + '.dmp') as f:
+        hin = pk.load(f)
+
+    repeats = 50
+    tf_param = {'word': True, 'entity': False, 'we_weight': 0.1}
+    X_word, newIds, entityIds = GraphGenerator.getTFVectorX(hin, tf_param)
+    n = X_word.shape[0]
+
+    knowsim = sparse.lil_matrix((n, n))
+    for t in type_list:
+        tf_param = {'word': True, 'entity': True, 'we_weight': 0.1}
+        X_typed, newIds, entityIds = GraphGenerator.getTFVectorX(hin, tf_param, t)
+
+        # make similarity graph
+        cosX = cosine_similarity(X_typed)
+        graph = sparse.lil_matrix((n, n))
+        for i in range(n):
+            for j in np.argpartition(cosX[i], -kNeighbors)[-kNeighbors:]:
+                if j == i:
+                    continue
+                graph[i, j] = cosX[i, j]  # np.exp(- (1 - cosX[i, j]) / 0.03) #
+                graph[j, i] = cosX[i, j]  # np.exp(- (1 - cosX[i, j]) / 0.03) #
+
+        # calculate laplacian scores
+        row_sum = graph.sum(axis=1)
+        laplacian_score = generate_laplacian_score(row_sum, X_word, kNeighbors)
+
+        # add meta-path-based similarity to the knowsim
+        knowsim = knowsim + np.exp(-tau * laplacian_score) * graph
+
+    knowsim = knowsim.tocsr()
+    print 'running lp'
+    lp_param = {'alpha':0.98, 'normalization_factor':5}
+    lp = 5
+    ssl = SSLClassifier(knowsim, newLabels, scope, lp_param, repeatTimes=50, trainNumbers=lp, classCount=count)
+    ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lp).zfill(3) + '_', newIds=newIds)
+    return ssl.get_mean()
 
 
 def run_lp_meta():
@@ -776,7 +821,7 @@ def run_nb():
         with open('data/local/laplacian/' + scope_name +'.x') as f:
             X = pk.load(f)
         y = GraphGenerator.gety(hin)
-        result[i+2, 1] = svm_experiment(scope_name, X, y)
+        result[i+2, 1] = nb_experiment(scope_name, X, y)
 
 
 def run_lp():
@@ -801,12 +846,41 @@ def run_lp():
         count = gcat_counts[i]
         with open('data/local/' + scope_name + '.dmp') as f:
             hin = pk.load(f)
+        tf_param = {'word': True, 'entity': True, 'we_weight': 0.112}
+        newLabels = GraphGenerator.getNewLabels(hin)
+        graph, newIds = GraphGenerator.generateCosineNeighborGraph(hin, 10, tf_param)
 
         with open('data/local/laplacian/' + scope_name + '.x') as f:
             X = pk.load(f)
         graph = GraphGenerator.generateCosineNeighborGraphfromX(X)
         print scope_name + ' lp+entity'
         result[i+2, 4] = lp_experiment(scope, scope_name, count, graph, newLabels, newIds)
+
+
+def run_knowsim():
+    # 20NG
+    for i in range(2):
+        scope_name = ng20_scope_names[i]
+        scope = ng20_scopes[i]
+        count = ng20_counts[i]
+        with open('data/local/' + scope_name + '.dmp') as f:
+            hin = pk.load(f)
+        newLabels = GraphGenerator.getNewLabels(hin)
+        print scope_name + ' knowsim'
+        print knowsim_experiment(scope, scope_name, NG20TypeList, count, newLabels)
+
+    # GCAT
+    for i in range(2):
+        scope_name = gcat_scope_names[i]
+        scope = gcat_scopes[i]
+        count = gcat_counts[i]
+        with open('data/local/' + scope_name + '.dmp') as f:
+            hin = pk.load(f)
+        type_list = GCATTypeList[i]
+        newLabels = GraphGenerator.getNewLabels(hin)
+        print scope_name + ' knowsim'
+        print knowsim_experiment(scope, scope_name, type_list, count, newLabels)
+
 
 def semihin_experiment(scope, scope_name, count, X, newIds):
     experiment_path = 'data/local/split/' + scope_name + '/'

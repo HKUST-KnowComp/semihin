@@ -91,7 +91,7 @@ class GraphGenerator:
     # generate TF vector for sklearn
     # output all X for further processing
     @staticmethod
-    def getTFVectorX(hin, param={'word':True, 'entity':True, 'we_weight':0.112},entity_types=None):
+    def getTFVectorX(hin, param={'word':True, 'entity':True, 'we_weight':0.112},entity_types=None, binary=False):
         # get new IDs for documents
         doc_new_ids = {}
         for doc in hin.DocIds:
@@ -112,6 +112,7 @@ class GraphGenerator:
                         break
 
         entity_count = {}
+
         for link in hin.Links:
             head = link[0]
             tail = link[2]
@@ -139,6 +140,7 @@ class GraphGenerator:
         n = len(doc_new_ids)
         m = len(entity_new_ids)
         X = sparse.lil_matrix((n,m))
+
 
         for link in hin.Links:
             head = link[0]

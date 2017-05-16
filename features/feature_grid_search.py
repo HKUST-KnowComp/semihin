@@ -22,9 +22,9 @@ def grid_search(kNeighbor_list, feature_list, scope_name):
     with open('data/local/' + scope_name + '.dmp') as f:
         hin = pk.load(f)
 
-    X_word, newIds, e_newIds = GraphGenerator.getTFIDFVectorX(hin,
+    X_word, newIds, e_newIds = GraphGenerator.getTFVectorX(hin,
                                                               param={'word': True, 'entity': False, 'we_weight': 1})
-    X_ent, newIds, e_newIds = GraphGenerator.getTFIDFVectorX(hin, param={'word': False, 'entity': True, 'we_weight': 1})
+    X_ent, newIds, e_newIds = GraphGenerator.getTFVectorX(hin, param={'word': False, 'entity': True, 'we_weight': 1})
     y = GraphGenerator.gety(hin)
 
 #    print X_ent.sum()
@@ -44,7 +44,7 @@ def grid_search(kNeighbor_list, feature_list, scope_name):
                 best_k = k
                 best_f = f
                 best_features = filtered_f
-            print 'Feature %d\tNeighbor %d\tRes %f\tBest %f' %(f, k, res, best)
+            #print 'Feature %d\tNeighbor %d\tRes %f\tBest %f' %(f, k, res, best)
     print 'Best K=%d Best F=%d' %(best_k, best_f)
     if not os.path.exists('data/local/laplacian'):
         os.makedirs('data/local/laplacian')
@@ -86,6 +86,26 @@ def generate_laplacian_score(X_ent, X_word, kNeighbors):
     return (laplacian_score)
 
 
+def generate_laplacian_score_scalar(X_ent, X_word, kNeighbors):
+    # Generate cosine similarity graph
+    n = X_ent.shape[0]
+    cosX = cosine_similarity(X_word)
+    graph = np.zeros((n, n))
+    for i in range(n):
+        for j in np.argpartition(cosX[i], -kNeighbors)[-kNeighbors:]:
+            if j == i:
+                continue
+            graph[i, j] = cosX[i, j]
+            graph[j, i] = cosX[i, j]
+
+    D = sparse.diags([graph.sum(axis=0)], [0])
+    L = D - graph
+    f_tilde = X_ent - (float(X_ent.transpose() * D * np.ones((n, 1))) / D.sum().sum()) * np.ones((n, 1))
+    score = float(f_tilde.transpose() * L * f_tilde) / float(f_tilde.transpose() * D * f_tilde + 1e-10)
+    laplacian_score = score
+    return laplacian_score
+
+
 def filter_features(laplacian_score, num_features):
 
     # Select Feature with lowest Laplacian Score
@@ -116,8 +136,6 @@ def test_grid(X_ent, X_word, y, features, scope_name):
 
         # train
         clf = LinearSVC(C=0.01)
-        # lf = LogisticRegression(C=0.01)
-        # clf = MultinomialNB()
         clf.fit(XTrain, yTrain)
 
         # test
