@@ -1,7 +1,6 @@
 from sklearn.svm import LinearSVC
 import numpy as np
 import cPickle as pk
-from graphgenerator import GraphGenerator
 from sklearn.metrics.pairwise import cosine_similarity
 import time
 import scipy.sparse as sparse

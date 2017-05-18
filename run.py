@@ -4,6 +4,7 @@ from graphgenerator import GraphGenerator
 from sklearn.svm import LinearSVC
 from sklearn.naive_bayes import GaussianNB
 from features.feature_grid_search import generate_laplacian_score_scalar as generate_laplacian_score
+from features.feature_grid_search import generate_laplacian_score as generate_laplacian_score_vector
 from sklearn.metrics.pairwise import cosine_similarity
 
 import scipy.sparse as sparse
@@ -42,7 +43,7 @@ ng20_scopes = [SIM, DIFF]
 ng20_counts = [SIM_count, DIFF_count]
 gcat_counts = [GSIM_count, GDIF_count]
 lp_cand = [5]
-result = np.zeros((4,11))
+result = np.zeros((4,12))
 
 
 def run_dump_gcat(scope_name, scope):
@@ -206,7 +207,7 @@ def lp_experiment(scope, scope_name, count, graph, labels, newIds):
     return ssl.get_mean()
 
 
-def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
+def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count, label_num=5):
 
     pred_path = 'data/local/lpmeta/' + scope_name + '/'
     if not os.path.exists(pred_path):
@@ -218,7 +219,7 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
 
     tf_param = {'word':True, 'entity':True, 'we_weight':0.1}
     c = len(scope)
-    lb_cand = [5]
+    lb_cand = [label_num]
     repeats = 50
 
     # rounds for alternating optimization
@@ -240,7 +241,7 @@ def lp_meta_experiment(scope, scope_name, type_list, threshold, weight, count):
         #    lp_param = {'alpha':0.98, 'normalization_factor':5}
             # 3-class classification
 
-            lb = 5
+            lb = label_num
             ssl = SSLClassifier(graph, newLabel, scope, lp_param, repeatTimes=repeats, trainNumbers=lb,classCount=count)
             if rd == 0:
                 ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
@@ -491,7 +492,7 @@ def ensemble_gal_experiment(scope, scope_name, type_list, threshold):
             command_file.write(command + '\r\n')
 
 
-def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight, count):
+def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight, count, label_num=5):
 
     pred_path = 'data/local/cotrain/' + scope_name + '/'
     split_path = 'data/local/split/' + scope_name + '/'
@@ -503,14 +504,34 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
 
     tf_param = {'word':True, 'entity':True, 'we_weight':0.1}
     c = len(scope)
-    lb_cand = [5]
+    lb_cand = [label_num]
     repeats = 50
 
     # rounds for alternating optimization
-    rounds = 3
-
+    rounds = 2
     best_res = 0
-    best_t = ''
+    X_s = {}
+
+    tf_param = {'word': True, 'entity': False, 'we_weight': 0.112}
+    X_word, newIds, entity_new_ids = GraphGenerator.getTFVectorX(hin, param=tf_param, entity_types=None)
+
+    for t in type_list:
+        if not os.path.exists(pred_path + str(t) + '/'):
+            os.makedirs(pred_path + str(t) + '/')
+
+        tf_param = {'word': True, 'entity': True, 'we_weight': 0.112}
+        X_typed, newIds, entityIds = GraphGenerator.getTFVectorX(hin, tf_param, t)
+        laplacian_score = generate_laplacian_score_vector(X_typed, X_word, 100)
+        #thres = laplacian_score[laplacian_score.argsort()[2000 - 1]]
+        #print thres
+        #laplacian_score = np.array(
+        #    np.where(laplacian_score <= thres, 20 * np.exp(-laplacian_score * 0.01), np.exp(-thres * 0.01)))
+        laplacian_score = 20 * np.exp(-laplacian_score * 0.01)
+        # laplacian_score = laplacian_score / np.sum(laplacian_score) * laplacian_score.shape[0]
+        D = sparse.diags(laplacian_score)
+        X_typed = X_typed * D
+        X_s[str(t)] = X_typed
+
     for rd in range(rounds):
         round_best_res = 0
         round_best_t = ''
@@ -518,23 +539,19 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
         # step 1:
         # generate output of each meta-path
         for t in type_list:
-            if not os.path.exists(pred_path + str(t) + '/'):
-                os.makedirs(pred_path + str(t) + '/')
 
-            X, newIds, entityIds = GraphGenerator.getTFVectorX(hin,tf_param,t)
+            X = X_s[str(t)].toarray()
             n = X.shape[0]
             e = X.shape[1]
-            X = X.toarray()
             graph = np.zeros((n+e,n+e))
             graph[0:n,n:n+e] = X
             graph[n:n+e,0:n] = X.transpose()
             graph = sparse.csc_matrix(graph)
 
             newLabel = GraphGenerator.getNewLabels(hin)
-            #lp_param = {'alpha':0.99,'normalization_factor':0.01}
             lp_param = {'alpha': 0.98, 'normalization_factor': 5, 'method': 'variant'}
 
-            lb = 5
+            lb = label_num
             ssl = SSLClassifier(graph, newLabel, scope, lp_param, repeatTimes=repeats, trainNumbers=lb, classCount=count)
             if rd == 0:
                 ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lb).zfill(3) + '_',
@@ -596,7 +613,7 @@ def ensemble_cotrain_experiment(scope, scope_name, type_list, threshold, weight,
     return best_res
 
 
-def knowsim_experiment(scope, scope_name, type_list, count, newLabels, tau=1, kNeighbors=100):
+def knowsim_experiment(scope, scope_name, type_list, count, newLabels, tau=1, kNeighbors=10, label_num = 5):
     split_path = 'data/local/split/' + scope_name + '/'
     with open('data/local/' + scope_name + '.dmp') as f:
         hin = pk.load(f)
@@ -631,9 +648,9 @@ def knowsim_experiment(scope, scope_name, type_list, count, newLabels, tau=1, kN
     knowsim = knowsim.tocsr()
     print 'running lp'
     lp_param = {'alpha':0.98, 'normalization_factor':5}
-    lp = 5
-    ssl = SSLClassifier(knowsim, newLabels, scope, lp_param, repeatTimes=50, trainNumbers=lp, classCount=count)
-    ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(lp).zfill(3) + '_', newIds=newIds)
+
+    ssl = SSLClassifier(knowsim, newLabels, scope, lp_param, repeatTimes=50, trainNumbers=label_num, classCount=count)
+    ssl.repeatedFixedExperimentwithNewIds(pathPrefix=split_path + 'lb' + str(label_num).zfill(3) + '_', newIds=newIds)
     return ssl.get_mean()
 
 
@@ -664,7 +681,7 @@ def run_meta_graph_ensemble_svm():
         scope = ng20_scopes[i]
         count = ng20_counts[i]
         print scope_name + ' svm ensemble'
-        result[i, 8] = ensemble_svm_experiment(scope, scope_name, NG20TypeList, NG20_threshold)
+        result[i, 9] = ensemble_svm_experiment(scope, scope_name, NG20TypeList, NG20_threshold)
 
 
     # GCAT
@@ -674,7 +691,7 @@ def run_meta_graph_ensemble_svm():
         count = gcat_counts[i]
         type_list = GCATTypeList[i]
         print scope_name + ' svm ensemble'
-        result[i+2, 8] = ensemble_svm_experiment(scope, scope_name, type_list, GCAT_threshold)
+        result[i+2, 9] = ensemble_svm_experiment(scope, scope_name, type_list, GCAT_threshold)
 
 
 def run_meta_graph_ensemble_gal():
@@ -712,7 +729,7 @@ def run_meta_graph_ensemble_cotrain():
         scope = ng20_scopes[i]
         count = ng20_counts[i]
         print scope_name + ' cotrain ensemble'
-        result[i, 10] = ensemble_cotrain_experiment(scope, scope_name, NG20TypeList, NG20_threshold, NG20_weight, count)
+        result[i, 11] = ensemble_cotrain_experiment(scope, scope_name, NG20TypeList, NG20_threshold, NG20_weight, count)
 
     # GCAT
     for i in range(2):
@@ -722,7 +739,7 @@ def run_meta_graph_ensemble_cotrain():
         weight = GCAT_weight[i]
         type_list = GCATTypeList[i]
         print scope_name + ' cotrain ensemble'
-        result[i+2, 10] = ensemble_cotrain_experiment(scope, scope_name, type_list, GCAT_threshold, weight, count)
+        result[i+2, 11] = ensemble_cotrain_experiment(scope, scope_name, type_list, GCAT_threshold, weight, count)
 
 
 def run_generate_meta_graph():
@@ -867,7 +884,8 @@ def run_knowsim():
             hin = pk.load(f)
         newLabels = GraphGenerator.getNewLabels(hin)
         print scope_name + ' knowsim'
-        print knowsim_experiment(scope, scope_name, NG20TypeList, count, newLabels)
+        res = knowsim_experiment(scope, scope_name, NG20TypeList, count, newLabels)
+        result[i, 6] = res
 
     # GCAT
     for i in range(2):
@@ -879,10 +897,11 @@ def run_knowsim():
         type_list = GCATTypeList[i]
         newLabels = GraphGenerator.getNewLabels(hin)
         print scope_name + ' knowsim'
-        print knowsim_experiment(scope, scope_name, type_list, count, newLabels)
+        result[i+2, 6] =  knowsim_experiment(scope, scope_name, type_list, count, newLabels)
 
 
-def semihin_experiment(scope, scope_name, count, X, newIds):
+
+def semihin_experiment(scope, scope_name, count, X, newIds, label_num=5):
     experiment_path = 'data/local/split/' + scope_name + '/'
 
     with open('data/local/' + scope_name + '.dmp') as f:
@@ -901,12 +920,9 @@ def semihin_experiment(scope, scope_name, count, X, newIds):
     newLabel = GraphGenerator.getNewLabels(hin)
     lp_param = {'alpha': 0.98, 'normalization_factor': 5, 'method': 'variant'}
 
-    #    lp_param = {'alpha':0.98, 'normalization_factor':5}
-    # 3-class classification
-    lp = 5
     ssl = SSLClassifier(graph, newLabel, scope, lp_param, repeatTimes=50,
-                        trainNumbers=lp, classCount=count)
-    ssl.repeatedFixedExperimentwithNewIds(pathPrefix=experiment_path + 'lb' + str(lp).zfill(3) + '_', newIds=newIds)
+                        trainNumbers=label_num, classCount=count)
+    ssl.repeatedFixedExperimentwithNewIds(pathPrefix=experiment_path + 'lb' + str(label_num).zfill(3) + '_', newIds=newIds)
     return ssl.get_mean()
 
 
@@ -924,12 +940,12 @@ def run_semihin():
         tf_param = {'word': True, 'entity': False, 'we_weight': 0.112}
         X, newIds, entity_new_ids = GraphGenerator.getTFVectorX(hin, param=tf_param, entity_types=None)
         print scope_name + ' semihin'
-        result[i, 6] = semihin_experiment(scope, scope_name, count, X, newIds)
+        result[i, 7] = semihin_experiment(scope, scope_name, count, X, newIds)
 
         tf_param = {'word': True, 'entity': True, 'we_weight': 0.112}
         X, newIds, entity_new_ids = GraphGenerator.getTFVectorX(hin, param=tf_param, entity_types=None)
         print scope_name + ' semihin+entity'
-        result[i, 7] = semihin_experiment(scope, scope_name, count, X, newIds)
+        result[i, 8] = semihin_experiment(scope, scope_name, count, X, newIds)
 
     # GCAT
     for i in range(2):
@@ -972,6 +988,7 @@ def run_all_experiments():
     run_semihin()
     run_lp()
     run_lp_meta()
+    run_knowsim()
     run_svm()
     run_nb()
     run_meta_graph_ensemble_svm()

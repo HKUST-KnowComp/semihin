@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import time
 import pickle as pk
+from features.laplacian_score import generate_laplacian_score
 
 class GraphGenerator:
 
@@ -396,5 +397,27 @@ class GraphGenerator:
                 elif not type_flag and  hin.NodeTypes[tail] != hin.TypeIds['word'] and tail in entity_new_ids:
                     X[doc_new_ids[head], entity_new_ids[tail]] += 1
 
+        tf_param = {'word': True, 'entity': False, 'we_weight': 0.112}
+        X_word, newIds, entity_new_ids = GraphGenerator.getTFVectorX(hin, param=tf_param, entity_types=None)
+        laplacian_score = generate_laplacian_score(X, X_word, 100)
+        laplacian_score = 20 * np.exp(-laplacian_score * 0.01)
+        D = sparse.diags(laplacian_score)
+        X = X * D
+
         Xc = X.tocsc()
-        return Xc * Xc.transpose(), doc_new_ids
+        kNeighbors = 10
+        cosX = cosine_similarity(Xc)
+        n = cosX.shape[0]
+        graph = np.zeros((n,n))
+        tic = time.time()
+        for i in range(n):
+            for j in np.argpartition(-cosX[i],kNeighbors)[:kNeighbors]:
+                if j == i:
+                    continue
+                #graph[i, j] += cosX[i, j]
+                #graph[j, i] += cosX[i, j]
+                graph[i, j] += 1
+                graph[j, i] += 1
+        toc = time.time() - tic
+
+        return sparse.csc_matrix(graph), doc_new_ids
