@@ -322,8 +322,7 @@ def generate_meta_graph(scope, scope_name, type_list, count):
         graph = sparse.csc_matrix(graph)
 
         newLabel = GraphGenerator.getNewLabels(hin)
-        lp_param = {'alpha':0.99,'normalization_factor':0.01}
-    #    lp_param = {'alpha':0.98, 'normalization_factor':5}
+        lp_param = {'alpha':0.98, 'normalization_factor':5}
         # 3-class classification
         lp_candidate = [5]
         for lp in lp_candidate:
