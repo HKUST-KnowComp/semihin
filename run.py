@@ -36,9 +36,5 @@ def run_all():
     print_result()
     dump_result()
 
-#run_generate_laplacian_score()
-#run_generate_meta_graph()
-#run_meta_graph_ensemble_svm()
-#run_meta_graph_ensemble_gal()
-run_meta_graph_ensemble_cotrain()
+run_all()
 print_result()
